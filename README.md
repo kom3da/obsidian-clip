@@ -47,16 +47,14 @@ Bookmarks/YYYY-MM-DD-タイトル.md
 
 ### 3. 環境変数
 
-`~/.zshrc` に追加：
+シェルの設定ファイル（`~/.zshrc`, `~/.bashrc` など）に追加：
 
 ```bash
 export GEMINI_API_KEY="your-gemini-api-key"
 export OBSIDIAN_API_KEY="your-obsidian-api-key"
 ```
 
-```bash
-source ~/.zshrc
-```
+設定後、シェルを再起動するか `source` で反映してください。
 
 ### 4. インストール
 
