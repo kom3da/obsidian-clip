@@ -52,16 +52,28 @@ export OBSIDIAN_API_KEY="your-obsidian-api-key"
 ## 使い方
 
 ```bash
-obsidian-clip <URL>
+obsidian-clip [オプション] <URL>...
 ```
 
-```
-$ obsidian-clip https://www.rust-lang.org/
-📄 ページを取得中: https://www.rust-lang.org/
-✅ タイトル: Rust Programming Language
-🤖 Geminiで要約中...
-💾 Obsidianに保存中...
-✅ 保存完了: Bookmarks/2026-04-10-Rust Programming Language.md
+### オプション
+
+| オプション | 説明 |
+|---|---|
+| `-n`, `--dry-run` | 保存せずにノート内容をプレビュー |
+| `-h`, `--help` | ヘルプを表示 |
+| `-V`, `--version` | バージョンを表示 |
+
+### 例
+
+```bash
+# 1つのURLを保存
+obsidian-clip https://www.rust-lang.org/
+
+# 複数URLをまとめて保存
+obsidian-clip https://www.rust-lang.org/ https://doc.rust-lang.org/book/
+
+# 保存せずにプレビュー
+obsidian-clip --dry-run https://www.rust-lang.org/
 ```
 
 ### 保存されるノートの形式
@@ -106,3 +118,7 @@ cargo install --path .
 git tag v0.x.0
 git push origin v0.x.0
 ```
+
+## ライセンス
+
+[MIT](LICENSE)
