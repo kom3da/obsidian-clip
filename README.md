@@ -67,6 +67,8 @@ export OBSIDIAN_API_KEY="your-obsidian-api-key"
 | `obsidian-clip-aarch64-apple-darwin.tar.gz` | macOS (Apple Silicon) |
 | `obsidian-clip-x86_64-apple-darwin.tar.gz` | macOS (Intel) |
 | `obsidian-clip-x86_64-unknown-linux-gnu.tar.gz` | Linux (x86_64) |
+| `obsidian-clip-aarch64-unknown-linux-gnu.tar.gz` | Linux (ARM64) |
+| `obsidian-clip-x86_64-pc-windows-msvc.tar.gz` | Windows (x86_64) |
 
 ```bash
 tar xzf obsidian-clip-*.tar.gz
