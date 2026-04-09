@@ -9,11 +9,7 @@ pub fn summarize(config: &Config, title: &str, content: &str, url: &str) -> Resu
 
     let prompt = render_template(
         &config.prompt_template,
-        &[
-            ("title", title),
-            ("url", url),
-            ("content", content),
-        ],
+        &[("title", title), ("url", url), ("content", content)],
     );
 
     let body = json!({

@@ -27,3 +27,29 @@ fn encode_path(s: &str) -> String {
         })
         .collect()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn encode_spaces() {
+        assert_eq!(encode_path("hello world"), "hello%20world");
+    }
+
+    #[test]
+    fn encode_special_chars() {
+        assert_eq!(encode_path("a#b?c&d"), "a%23b%3Fc%26d");
+    }
+
+    #[test]
+    fn encode_no_change() {
+        assert_eq!(encode_path("simple.md"), "simple.md");
+    }
+
+    #[test]
+    fn encode_japanese() {
+        let input = "2026-04-10-Rust入門.md";
+        assert_eq!(encode_path(input), input);
+    }
+}

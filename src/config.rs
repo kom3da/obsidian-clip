@@ -108,3 +108,62 @@ fn default_user_agent() -> String {
     };
     format!("Mozilla/5.0 ({})", os)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn default_config_values() {
+        let config = Config::default();
+        assert_eq!(config.gemini_model, "gemini-2.5-flash");
+        assert_eq!(config.obsidian_api_port, 27123);
+        assert_eq!(config.obsidian_folder, "Bookmarks");
+        assert_eq!(config.max_retries, 3);
+        assert!(config.gemini_api_key.is_none());
+        assert!(config.obsidian_api_key.is_none());
+    }
+
+    #[test]
+    fn has_key_checks() {
+        let mut config = Config::default();
+        assert!(!config.has_gemini_key());
+        assert!(!config.has_obsidian_key());
+
+        config.gemini_api_key = Some("key123".to_string());
+        assert!(config.has_gemini_key());
+
+        config.gemini_api_key = Some("".to_string());
+        assert!(!config.has_gemini_key());
+    }
+
+    #[test]
+    fn parse_partial_toml() {
+        let toml_str = r#"
+            gemini_model = "gemini-2.0-pro"
+            obsidian_folder = "Clips"
+        "#;
+        let config: Config = toml::from_str(toml_str).unwrap();
+        assert_eq!(config.gemini_model, "gemini-2.0-pro");
+        assert_eq!(config.obsidian_folder, "Clips");
+        // 未指定のフィールドはデフォルト値
+        assert_eq!(config.obsidian_api_port, 27123);
+        assert_eq!(config.max_retries, 3);
+    }
+
+    #[test]
+    fn user_agent_contains_mozilla() {
+        let ua = default_user_agent();
+        assert!(ua.starts_with("Mozilla/5.0"));
+    }
+
+    #[test]
+    fn default_templates_contain_placeholders() {
+        assert!(DEFAULT_NOTE_TEMPLATE.contains("{{title}}"));
+        assert!(DEFAULT_NOTE_TEMPLATE.contains("{{url}}"));
+        assert!(DEFAULT_NOTE_TEMPLATE.contains("{{date}}"));
+        assert!(DEFAULT_NOTE_TEMPLATE.contains("{{summary}}"));
+        assert!(DEFAULT_PROMPT_TEMPLATE.contains("{{title}}"));
+        assert!(DEFAULT_PROMPT_TEMPLATE.contains("{{content}}"));
+    }
+}
