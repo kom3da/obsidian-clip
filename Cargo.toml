@@ -1,0 +1,15 @@
+[package]
+name = "obsidian-clip"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "obsidian-clip"
+path = "src/main.rs"
+
+[dependencies]
+ureq = { version = "2.9", features = ["json", "tls"], default-features = false }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+scraper = "0.18"
+chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
